@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Pro Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js for hourly temperature trend -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="brand">
+        <span class="emoji">🌤️</span>
+        <h1>Weather</h1>
+      </div>
+
+      <!-- iPhone-like sliding theme toggle -->
+      <label class="switch" title="Toggle theme">
+        <input type="checkbox" id="themeToggle" />
+        <span class="slider">
+          <span class="sun">🌞</span>
+          <span class="moon">🌙</span>
+        </span>
+      </label>
+
+      <div class="search">
+        <input id="cityInput" type="text" placeholder="Search city..." autocomplete="off"/>
+        <button id="voiceBtn" title="Voice search">🎤</button>
+        <button id="searchBtn">Search</button>
+        <ul id="suggestions"></ul>
+      </div>
+
+      <div class="units">
+        <button id="toC" class="active">°C</button>
+        <button id="toF">°F</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- Left: Big card + hourly chart + mini forecast -->
+      <section class="left">
+        <article class="card big" id="nowCard">
+          <div class="now-top">
+            <div>
+              <h2 id="place">—</h2>
+              <div class="meta">
+                <span id="updatedTime">—</span>
+              </div>
+            </div>
+            <div class="temp-block">
+              <img id="icon" src="" alt="icon" class="icon"/>
+              <div class="temp-main">
+                <span id="temp" class="temp">--</span><span class="unit">°</span><span id="unitLabel">C</span>
+              </div>
+              <div class="desc" id="desc">—</div>
+              <div class="hi-lo">H<span id="tHigh">--</span>° • L<span id="tLow">--</span>°</div>
+            </div>
+          </div>
+          <div class="now-bottom">
+            <div class="pill"><span>💧 Humidity</span><strong id="humidity">--</strong>%</div>
+            <div class="pill"><span>👁 Visibility</span><strong id="visibility">--</strong> km</div>
+            <div class="pill"><span>🧭 Pressure</span><strong id="pressure">--</strong> mb</div>
+          </div>
+        </article>
+
+        <article class="card chart">
+          <h3>Hourly temperature</h3>
+          <canvas id="hourlyChart" height="110"></canvas>
+        </article>
+
+        <article class="card mini-forecast">
+          <div class="mini-row" id="miniRow"></div>
+        </article>
+      </section>
+
+      <!-- Right: stats cards -->
+      <aside class="right">
+        <article class="card aqi">
+          <div class="split">
+            <div>
+              <h3>Air Quality Index</h3>
+              <div class="aqi-value" id="aqiValue">--</div>
+              <div class="aqi-label" id="aqiLabel">—</div>
+            </div>
+            <div class="dial">
+              <div class="needle" id="aqiNeedle"></div>
+              <div class="ticks"></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card wind">
+          <h3>Wind</h3>
+          <div class="compass">
+            <div class="arrow" id="windArrow"></div>
+            <div class="dirs">N</div><div class="dirs e">E</div>
+            <div class="dirs s">S</div><div class="dirs w">W</div>
+          </div>
+          <div class="wind-meta">
+            <div>Speed: <strong id="windSpeed">--</strong> <span id="windUnit">m/s</span></div>
+            <div>Gust: <strong id="windGust">--</strong></div>
+          </div>
+        </article>
+
+        <article class="card uv">
+          <h3>UV Index</h3>
+          <div class="uv-value" id="uvValue">--</div>
+          <div class="uv-label" id="uvLabel">—</div>
+        </article>
+      </aside>
+    </main>
+
+    <footer class="app-footer">
+      <span id="footNote">Data: OpenWeather & Open-Meteo</span>
+    </footer>
+  </div>
+
+  <!-- subtle weather-tinted background -->
+  <div id="bg" class="bg clear"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
