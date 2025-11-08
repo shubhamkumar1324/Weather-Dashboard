@@ -62,7 +62,6 @@ Weather Dashboard/
   - UI theme color tone
   - Background sound
   - Weather icon
-  - Dynamic background style
 - The hourly and multi-day forecast are extracted and charted visually
 - Wind direction is converted into degrees → rotated inside a compass
 - Light/Dark Mode is saved and restored on reload
